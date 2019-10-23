@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Function;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -71,6 +73,17 @@ public class SimpleListTests {
 		for(Object o : result){
 			int i = (int)o;
 			assertTrue(i % 2 == 0);
+		}
+	}
+
+	@Test
+	void testMap(){
+		logger.info("Testing map");
+		SimpleList<String> result = testList.map((Function<Integer,String>) o -> "Wert: " + o);
+		int i = 1;
+		for (String s : result){
+			assertEquals(s, "Wert: " + i);
+			i++;
 		}
 	}
 }
